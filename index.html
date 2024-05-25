@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Interaction</title>
+</head>
+<body>
+    <h1>Car Interaction</h1>
+    
+    <h2>Car</h2>
+    <label for="carMake">Make:</label>
+    <input type="text" id="carMake" placeholder="Enter car make"><br>
+
+    <label for="carSpeed">Speed:</label>
+    <input type="number" id="carSpeed" placeholder="Enter car speed"><br>
+
+    <button onclick="accelerateCar()">Accelerate</button>
+    <button onclick="brakeCar()">Brake</button><br><br>
+    <div id="carStatus"></div>
+
+    <script src="Car.js"></script>
+    <script>
+        let car;
+
+        function accelerateCar() {
+            const make = document.getElementById('carMake').value;
+            const speed = parseFloat(document.getElementById('carSpeed').value);
+            if (!car || car.make !== make) {
+                car = new Car(make, speed);
+            }
+            car.accelerate();
+            document.getElementById('carStatus').innerText = `${make} is accelerating. Current speed: ${car.speed} km/h`;
+        }
+
+        function brakeCar() {
+            if (!car) return;
+            car.brake();
+            document.getElementById('carStatus').innerText = `${car.make} is braking. Current speed: ${car.speed} km/h`;
+        }
+    </script>
+</body>
+</html>
